@@ -1,18 +1,16 @@
 
 // Saludar al usuario
-alert('Hola, soy el Bot y estoy para ayudarte'); // bloquea
+// alert('Hola, soy el Bot y estoy para ayudarte'); // bloquea
 
 // Opciones para continuar
 const opciones = 'Elige una opcion para continuar: 1. Contactar a soporte | 2. Quiero comprar';
 
-// Mostrar opciones
-const opcion = prompt(opciones); // retorna un string
+// "scope" es el ambito donde viven las variables
+let i = 'estoy afuera del for';
 
-// Validar que el valor de la opcion sea conocido
-if (opcion === '1') {
-    alert('Aguarda y te contactaremos con el area de soporte.')
-} else if (opcion === '2') {
-    alert('Aguarda y te contactaremos con el area comercial.')
-} else {
-    alert('Vuelve a intentar ingresando una opcion valida.')
+// Las variables creadas con "let" pertenecen al ambito donde fueron creadas
+for (let i = 0; i < 10; i++) {
+    console.log(i);
 }
+
+console.log(i);
