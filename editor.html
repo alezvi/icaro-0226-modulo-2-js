@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p id="paragraph">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro commodi, maiores cupiditate possimus asperiores nostrum, quod tempora numquam sunt nemo aperiam, quam dolor sed. Eos exercitationem consequuntur quidem odio itaque!</p>
+
+    <p id="font-size-display"></p>
+
+    <input type="color" id="input-color">
+
+    <button id="btn-increment">+</button>
+    <button id="btn-reset">R</button>
+    <button id="btn-decrement">-</button>
+
+    <script>
+        let fontSize = 24;
+
+        const paragraph = document.getElementById('paragraph');
+
+        const fontSizeDisplay = document.getElementById('font-size-display');
+
+        const inputColor = document.getElementById('input-color');
+        const btnIncrement = document.getElementById('btn-increment');
+        const btnReset = document.getElementById('btn-reset');
+        const btnDecrement = document.getElementById('btn-decrement');
+
+        inputColor.addEventListener('input', function (e) {
+            paragraph.style.color = e.target.value;
+        });
+
+        btnIncrement.addEventListener('click', function () {
+            fontSize = fontSize + 3;
+            paragraph.style.fontSize = fontSize + 'px';
+            fontSizeDisplay.innerText = fontSize + 'px';
+        });
+
+        btnReset.addEventListener('click', function () {
+            fontSize = 16 + 3;
+            paragraph.style.fontSize = 16 + 'px';
+            fontSizeDisplay.innerText = 16 + 'px';
+        });
+
+        btnDecrement.addEventListener('click', function () {
+            fontSize = fontSize - 3;
+            paragraph.style.fontSize = fontSize + 'px';
+            fontSizeDisplay.innerText = fontSize + 'px';
+        });
+    </script>
+</body>
+</html>
