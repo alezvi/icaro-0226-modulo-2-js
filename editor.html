@@ -4,14 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style type="text/css">
+        .input-error {
+            color: red;
+            border: 1px solid red;
+            border-radius: 3px;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
 
     <p id="paragraph">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro commodi, maiores cupiditate possimus asperiores nostrum, quod tempora numquam sunt nemo aperiam, quam dolor sed. Eos exercitationem consequuntur quidem odio itaque!</p>
 
+    <div>
+        <input type="text" id="input-font-size">
+    </div>
+
     <p id="font-size-display"></p>
 
     <input type="color" id="input-color">
+
+    <div id="js-default-colors"></div>
 
     <button id="btn-increment">+</button>
     <button id="btn-reset">R</button>
@@ -20,14 +35,64 @@
     <script>
         let fontSize = 24;
 
+        const defaultColors = [
+            {name: 'Blanco', hex: '#FFF'},
+            {name: 'Naranja', hex: '#F60'},
+            {name: 'Verde', hex: '#090'},
+        ];
+
+        const defaultColorsSelector = document.getElementById('js-default-colors');
+
+        for (let i = 0; i < defaultColors.length; i++) {
+            const button = document.createElement('button');
+            button.style.backgroundColor = defaultColors[i].hex;
+            button.innerText = defaultColors[i].name;
+            defaultColorsSelector.appendChild(button);
+
+            button.addEventListener('click', function () {
+                console.log('click button')
+            })
+        }
+
+
+
+
+
+
+
         const paragraph = document.getElementById('paragraph');
 
         const fontSizeDisplay = document.getElementById('font-size-display');
 
+        const inputFontSize = document.getElementById('input-font-size');
         const inputColor = document.getElementById('input-color');
         const btnIncrement = document.getElementById('btn-increment');
         const btnReset = document.getElementById('btn-reset');
         const btnDecrement = document.getElementById('btn-decrement');
+
+        function updateFontSize(fontSize) {
+            paragraph.style.fontSize = fontSize + 'px';
+            fontSizeDisplay.innerText = fontSize + 'px';
+            inputFontSize.value = fontSize;
+        }
+
+        inputFontSize.addEventListener('input', function (e) {
+//            inputFontSize.parentElement.querySelector('span').remove();
+            inputFontSize.classList.remove('input-error')
+
+            if (isNaN(e.target.value)) {
+                inputFontSize.classList.add('input-error')
+
+                const errorMessage = document.createElement('span');
+                errorMessage.innerText = 'Ingrese un número';
+                inputFontSize.parentElement.appendChild(errorMessage);
+
+                return;
+            }
+
+            fontSize = e.target.value;
+            updateFontSize(fontSize)
+        })
 
         inputColor.addEventListener('input', function (e) {
             paragraph.style.color = e.target.value;
@@ -35,20 +100,17 @@
 
         btnIncrement.addEventListener('click', function () {
             fontSize = fontSize + 3;
-            paragraph.style.fontSize = fontSize + 'px';
-            fontSizeDisplay.innerText = fontSize + 'px';
+            updateFontSize(fontSize)
         });
 
         btnReset.addEventListener('click', function () {
-            fontSize = 16 + 3;
-            paragraph.style.fontSize = 16 + 'px';
-            fontSizeDisplay.innerText = 16 + 'px';
+            fontSize = 16;
+            updateFontSize(fontSize)
         });
 
         btnDecrement.addEventListener('click', function () {
             fontSize = fontSize - 3;
-            paragraph.style.fontSize = fontSize + 'px';
-            fontSizeDisplay.innerText = fontSize + 'px';
+            updateFontSize(fontSize)
         });
     </script>
 </body>
