@@ -8,9 +8,11 @@ class WelcomeStep extends Step {
 
         let accion = '<p>Toque la pantalla para comenzar</p>';
     
-        const app = document.getElementById('app');
+        const el = document.createElement('div');
     
-        app.innerHTML = titulo;
-        app.innerHTML += accion;
+        el.innerHTML = titulo;
+        el.innerHTML += accion;
+
+        return el;
     }
 }
